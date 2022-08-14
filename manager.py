@@ -46,23 +46,33 @@ class PasswordStore:
             json.dump(self.passwords, f)
         print(f'Password {name} saved!\n')
 
+    def name_list(self):
+        return [password['name'] for password in self.passwords]
+
     def delete_password(self):
-        names_list = [password['name'] for password in self.passwords]
-        print(f'\nCurrently saved passwords: {names_list}\n')
+        print(f'\nCurrently saved passwords: {self.name_list()}\n')
         pwd_to_delete = input('Enter the name of the password to delete: ')
-        for password in self.passwords:
-            if password['name'] == pwd_to_delete:
-                self.passwords.remove(password)
-        with open(self.filename, 'w') as f:
-            json.dump(self.passwords, f)
-        print(f'Password {pwd_to_delete} deleted!\n')
+        if pwd_to_delete not in self.name_list():
+            print('No such password in the manager!')
+        else:
+            for password in self.passwords:
+                if password['name'] == pwd_to_delete:
+                    self.passwords.remove(password)
+            with open(self.filename, 'w') as f:
+                json.dump(self.passwords, f)
+            print(f'Password {pwd_to_delete} deleted!\n')
 
     def show_all_passwords(self):
+        print('\n')
         for password in self.passwords: 
             print(password)
 
     def show_specific_password(self):
+        print(f'\nCurrently saved passwords: {self.name_list()}\n')
         pwd_to_show = input('\nEnter the name of the password: ')
-        for password in self.passwords:
-            if password['name'] == pwd_to_show:
-                print(password)
+        if pwd_to_show not in self.name_list():
+            print('No such password in the manager!')
+        else:
+            for password in self.passwords:
+                if password['name'] == pwd_to_show:
+                    print(password)
