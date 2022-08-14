@@ -44,3 +44,5 @@ Type q to quit the program: """)
         encryption.encrypt_file()
     elif answer == 'q':
         break
+    else:
+        print('\nIncorrect action, choose one from the list please')

@@ -63,9 +63,12 @@ class PasswordStore:
             print(f'Password {pwd_to_delete} deleted!\n')
 
     def show_all_passwords(self):
-        print('\n')
-        for password in self.passwords: 
-            print(password)
+        if self.passwords == []:
+            print('\nYou have no passwords saved at the moment.')
+        else:
+            print('\n')
+            for password in self.passwords: 
+                print(password)
 
     def show_specific_password(self):
         print(f'\nCurrently saved passwords: {self.name_list()}\n')
